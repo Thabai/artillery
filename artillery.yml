@@ -1,0 +1,29 @@
+config:
+  target: "{{$env.TARGET_MAIN}}"
+  engines: 
+    playwright: { extendedMetrics: true }
+  processor: './tests/artillery/artilleryScript.ts'
+  phases:
+    # #inject one user every second for 10s
+    # - name: constantArrival
+    #   duration: 10
+    #   arrivalRate: 1
+    # #Pause
+    # - name: pause
+    #   pause: 2
+    # #ramp up phase - 1 to 5 in 10s
+    # - name: ramp up
+    #   duration: 10
+    #   arrivalRate: 1
+    #   rampTo: 5
+    #fixed arrival - create 15 users in 10s
+    - name: fixed
+      duration: 10
+      arrivalCount: 15
+scenarios: 
+  - name: customCounter
+    engine: playwright
+    testFunction: 'artilleryScript'
+
+
+
